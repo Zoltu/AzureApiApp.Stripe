@@ -25,12 +25,12 @@ build:
   verbosity: minimal
   publish_wap: true
 
-#deploy:
-#  provider: WebDeploy
-#  server: https://<publishUrl>/msdeploy.axd?site=<msdeploySite>
-#  website: <msdeploySite>
-#  username: <userName>
-#  password:
-#    secure: <userPWD>
-#  ntlm: false
-#  remove_files: false
+deploy:
+  provider: WebDeploy
+  server: https://microsoft-apiapp6aa5356b397648b88cfa68c6a3b07a8a.scm.azurewebsites.net:443/msdeploy.axd?site=Microsoft-ApiApp6aa5356b397648b88cfa68c6a3b07a8a
+  website: Microsoft-ApiApp6aa5356b397648b88cfa68c6a3b07a8a
+  username: $Microsoft-ApiApp6aa5356b397648b88cfa68c6a3b07a8a
+  password:
+    secure: hPt1KkrHNI5XIeaXWG2hNHl6dviOdBOxNoe1EYjtMjNemaHgc0ojnbbGjEgSn9YhEisuI4T0NsOLuP919HvLvA==
+  ntlm: false
+  remove_files: false

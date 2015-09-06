@@ -17,8 +17,8 @@ namespace Zoltu.AzureApiApp.Controllers
 		{
 			Contract.Requires(cardTokenId != null);
 			Contract.Requires(stripeApiKey != null);
-			Contract.Ensures(Contract.Result<String>() != null);
 			Contract.Ensures(Contract.Result<Task<String>>() != null);
+			// TODO: Contract.Ensures(Contract.Result<String>() != null); waiting on release of Code Contracts with https://github.com/Microsoft/CodeContracts/commit/9b96aa83234cc7e0dd2b636341904eb1f15b8782 applied.
 
 			var address = @"https://api.stripe.com/v1/customers";
 			var authorizationHeader = GetBasicAuthenticationHeader(stripeApiKey, "");
@@ -28,10 +28,8 @@ namespace Zoltu.AzureApiApp.Controllers
 			var httpClient = new HttpClient();
 			httpClient.DefaultRequestHeaders.Authorization = authorizationHeader;
 			var result = await httpClient.PostAsync(address, formContent);
-			if (!result.IsSuccessStatusCode)
-				throw new HttpResponseException(result);
 
-			return await result.Content.ReadAsStringAsync();
+			return await result.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
 		}
 
 		private static AuthenticationHeaderValue GetBasicAuthenticationHeader(String username, String password)
